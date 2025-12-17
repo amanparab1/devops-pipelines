@@ -1,0 +1,24 @@
+name: CI pipeline
+
+on:
+  push:
+    branches: [ master ] # Ensure this matches your git branch (main or master)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # CHANGED: v5 -> v4
+
+      - name: Set up Node.js 
+        uses: actions/setup-node@v4 # CHANGED: v5 -> v4
+        with:
+          node-version: 20 # CHANGED: 16 -> 20 (LTS) for security
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
